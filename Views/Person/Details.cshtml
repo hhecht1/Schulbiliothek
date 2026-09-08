@@ -1,0 +1,52 @@
+@model SchulbibliothekAP14.Models.Person
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Person</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vorname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vorname)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nachname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nachname)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bild)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bild)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IstAktiv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IstAktiv)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonenTypId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PersonenTypId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

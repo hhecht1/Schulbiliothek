@@ -1,0 +1,35 @@
+﻿@using SchulbibliothekAP14.Viewmodels
+@model StatistikViewmodel
+
+<form method="get">
+	<label asp-for="DatumVon"></label>
+	<input asp-for="DatumVon" type="date" onchange="this.form.submit();" />
+
+	<label asp-for="DatumBis"></label>
+	<input asp-for="DatumBis" type="date" onchange="this.form.submit();" />
+
+	<label asp-for="PersonId"></label>
+	<select asp-for="PersonId" onchange="this.form.submit();">
+		<option value="">&nbsp;</option>
+		@foreach (var m in (List<Person>)ViewData["Personen"])
+		{
+			<option value="@m.Id">@m.Vorname @m.Nachname</option>
+		}
+	</select>
+
+</form>
+<a href="/Statistik/Index/">Zurücksetzen</a>
+<div>
+	<strong>Anzahl Rückgaben</strong>
+	<span class="text-danger fs-5">
+		@Model.AnzahlRückgaben
+	</span>
+</div>
+
+<div>
+	<strong>Summe Ausleihen</strong>
+	<span class="text-danger fs-5">
+		@Model.AnzahlAusleihen
+	</span>
+</div>
+<img src="/Statistik/FuenfHoechsteAusleihen?PersonId=@Model.PersonId&DatumVon=@Model.DatumVon&DatumBis=@Model.DatumBis" style="height:300px;" />
