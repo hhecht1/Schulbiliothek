@@ -53,12 +53,19 @@ public class TransaktionController : Controller
         SetViewData();
         if (ModelState.IsValid)
         {
-
             if (transaktion.Datum > DateTime.Now)
             {
-                ModelState.AddModelError("Datum", "Das Datum darf nicht in der Zukunft liegen.");
+                ModelState.AddModelError(nameof(transaktion.Datum), "Das Datum darf nicht in der Zukunft liegen");
                 return View(transaktion);
             }
+
+            var person = await _context.Person.FindAsync(transaktion.PersonId);
+
+            if (person == null || !person.IstAktiv)
+            {
+                ModelState.AddModelError(nameof(person.Id), "Diese Person ist nicht mehr vorhanden oder inaktiv");
+            }
+
             _context.Add(transaktion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -94,6 +101,18 @@ public class TransaktionController : Controller
         if (id != transaktion.Id)
         {
             return NotFound();
+        }
+
+        if (transaktion.Datum > DateTime.Now)
+        {
+            ModelState.AddModelError(nameof(transaktion.Datum), "Das Datum darf nicht in der Zukunft liegen");
+            return View(transaktion);
+        }
+
+        var person = await _context.Person.FindAsync(transaktion.PersonId);
+        if (person == null || !person.IstAktiv)
+        {
+            ModelState.AddModelError(nameof(person.Id), "Diese Person ist nicht mehr vorhanden oder inaktiv");
         }
 
         if (ModelState.IsValid)

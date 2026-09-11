@@ -55,19 +55,10 @@ public class PersonController : Controller
         {
             if (person.FormFile != null && person.FormFile.Length > 0)
             {
-
-                if (person.FormFile.Length > 0)
+                const long size = 1048576;
+                if (person.FormFile.Length > size)
                 {
-                    const long size = 1048576;
-                    if (person.FormFile.Length > size)
-                    {
-                        ModelState.AddModelError(nameof(person.FormFile), "Die Datei ist zu groß. Maximale Größe: 1 MB.");
-                        return View(person);
-                    }
-                }
-                if (person.IstAktiv == false)
-                {
-                    ModelState.AddModelError(nameof(person.IstAktiv), "Die Person muss aktiv sein, um ein Bild hochzuladen.");
+                    ModelState.AddModelError(nameof(person.FormFile), $"Das Bild darf nicht größer als {size} Bytes sein.");
                     return View(person);
                 }
 

@@ -17,33 +17,29 @@ namespace SchulbibliothekAP14.Controllers
         public async Task<IActionResult> Index(StatistikViewmodel viewmodel)
         {
             SetMitgliedId(viewmodel.PersonId);
-            SetMitgliedId(viewmodel.PersonId);
-            var ausleihenquery = _context.Transaktion
+
+            var ausleihenQuery = _context.Transaktion
                 .Where(t => t.TransaktionTypId == 1).AsQueryable();
-            var rückgabenquery = _context.Transaktion
+            var rückgabenQuery = _context.Transaktion
                 .Where(t => t.TransaktionTypId == 2).AsQueryable();
-
-
 
             if (viewmodel.PersonId.HasValue)
             {
-                ausleihenquery = ausleihenquery.Where(t => t.PersonId == viewmodel.PersonId.Value);
-                rückgabenquery = rückgabenquery.Where(t => t.PersonId == viewmodel.PersonId.Value);
+                ausleihenQuery = ausleihenQuery.Where(x => x.PersonId == viewmodel.PersonId);
+                rückgabenQuery = rückgabenQuery.Where(x => x.PersonId == viewmodel.PersonId);
             }
             if (viewmodel.DatumVon.HasValue)
             {
-                ausleihenquery = ausleihenquery.Where(x => DateOnly.FromDateTime(x.Datum) >= viewmodel.DatumVon);
-                rückgabenquery = rückgabenquery.Where(x => DateOnly.FromDateTime(x.Datum) >= viewmodel.DatumVon);
-            }
-            if (viewmodel.DatumBis.HasValue)
-            {
-                ausleihenquery = ausleihenquery.Where(y => DateOnly.FromDateTime(y.Datum) <= viewmodel.DatumBis);
-                rückgabenquery = rückgabenquery.Where(y => DateOnly.FromDateTime(y.Datum) <= viewmodel.DatumBis);
+                ausleihenQuery = ausleihenQuery.Where(x => DateOnly
+                .FromDateTime(x.Datum) >= viewmodel.DatumVon);
+
+                rückgabenQuery = rückgabenQuery.Where(x => DateOnly
+                .FromDateTime(x.Datum) >= viewmodel.DatumVon);
             }
 
-            var anzahlAusleihen = await ausleihenquery.CountAsync();
-            var anzahlRückgaben = await rückgabenquery.CountAsync();
 
+            var anzahlAusleihen = await ausleihenQuery.CountAsync();
+            var anzahlRückgaben = await rückgabenQuery.CountAsync();
             viewmodel.AnzahlAusleihen = anzahlAusleihen;
             viewmodel.AnzahlRückgaben = anzahlRückgaben;
 

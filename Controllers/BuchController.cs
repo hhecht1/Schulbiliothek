@@ -13,7 +13,7 @@ public class BuchController : Controller
     }
 
     // GET: BUCHS
-    public async Task<IActionResult> Index()    
+    public async Task<IActionResult> Index()
     {
         return View(await _context.Buch.ToListAsync());
     }
