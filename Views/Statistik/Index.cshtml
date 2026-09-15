@@ -1,4 +1,5 @@
 ﻿@using SchulbibliothekAP14.Viewmodels
+@using System.Globalization
 @model StatistikViewmodel
 
 <form method="get">
@@ -32,4 +33,12 @@
 		@Model.AnzahlAusleihen
 	</span>
 </div>
-<img src="/Statistik/FuenfHoechsteAusleihen?PersonId=@Model.PersonId&DatumVon=@Model.DatumVon&DatumBis=@Model.DatumBis" style="height:300px;" />
+
+<div>
+	@foreach (var t5 in Model.TopBücher)
+	{
+		<div>@t5.BuchId @t5.Buch @t5.Anzahl @t5.Personen</div>
+	}
+</div>
+
+<img src="/Statistik/FuenfHoechsteAusleihen/?PersonId=@Model.PersonId&DatumVon=@Model.DatumVon?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)&DatumBis=@Model.DatumBis?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)"	style="height:300px;" />

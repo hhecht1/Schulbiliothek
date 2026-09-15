@@ -1,4 +1,6 @@
-﻿namespace SchulbibliothekAP14.Viewmodels
+﻿using SchulbibliothekAP14.Models;
+
+namespace SchulbibliothekAP14.Viewmodels
 {
     public class StatistikViewmodel
     {
@@ -7,5 +9,6 @@
         public DateOnly? DatumVon { get; set; }
         public DateOnly? DatumBis { get; set; }
         public int? PersonId { get; set; }
+        public List<TopBuchDto> TopBücher { get; set; } = new List<TopBuchDto>();
     }
 }

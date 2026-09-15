@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SchulbibliothekAP14")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ea70665e639f1895ee591b1b358c63abf0123fb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8dc34e7f8ab5bc2f0bde203d1a540a4921d0f636")]
 [assembly: System.Reflection.AssemblyProductAttribute("SchulbibliothekAP14")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SchulbibliothekAP14")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
